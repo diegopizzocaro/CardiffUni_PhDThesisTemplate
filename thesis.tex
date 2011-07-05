@@ -1,0 +1,431 @@
+% This thesis template has been put together and edited by Diego Pizzocaro
+% It's a collection/edit of files produced by Frank C Langbein for his PhD thesis
+% and then edited by Ahmed Alazzawi, Hmood Al Dossari, Manar I. Hosny, H.Z. Al-Dossari 
+% and kindly shared by them.
+%
+% Following, the original GNU license chosen by Frank C Langbein, 
+% which is the same license for distributing this package.
+%
+% beautification.tex -- Beautification of Reverse Engineered Geometric Models
+%% PhD Thesis by Frank C. Langbein%
+% Maintainer: Frank C. Langbein <frank@langbein.org>
+% Version: 1.0
+% Copyright (c) 2003 Frank C Langbein.
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.2 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A
+% copy of the license is included in the section entitled "GNU Free
+% Documentation License".
+%
+
+
+\documentclass[a4paper,oneside,onecolumn,openright,12pt]{book}
+
+
+\makeatletter
+
+%
+\usepackage{caption}
+\usepackage{footmisc}
+\usepackage{paralist}
+\usepackage{amsthm}
+\usepackage{subfig}
+%\usepackage{algorithm}
+%\usepackage{graphicx}
+%\usepackage{rotating}
+%\usepackage{amssymb}
+
+
+% Fonts, encoding, etc.
+\usepackage{type1cm}
+\usepackage[latin1]{inputenc}
+\usepackage[british]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{hyperref}
+\usepackage[all]{hypcap}
+\usepackage{longtable}
+%\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+%\usepackage{graphicx}
+%\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{float}
+%\usepackage{subfigure}
+% Line spacing
+\def\baselinestretch{1.5}
+\parindent0cm
+\parskip1.5ex\@plus.7ex\@minus.1ex\relax
+
+%Acronyms
+ \usepackage{acronym}
+ %Inline lists
+ \usepackage{paralist}
+
+% Page dimensions
+\usepackage{vmargin}
+\setpapersize{A4}
+\setmarginsrb{40mm}{20mm}{25mm}{30mm}{14.5pt}{8mm}{0pt}{11mm}
+
+% Footer and header
+\usepackage{afterpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO,RE]{\slshape \leftmark}
+\fancyfoot{}
+\renewcommand{\chaptermark}[1]{}
+\renewcommand{\sectionmark}[1]%
+             {\markboth{\thesection\ #1}{\thesection\ #1}}
+\renewcommand{\subsectionmark}[1]{}
+\fancypagestyle{plain}{%
+  \fancyhead{}
+  \fancyhead[LE,RO]{\thepage}
+  \fancyfoot{}
+  \renewcommand{\headrulewidth}{.6pt}
+}
+
+% Chapter
+\def\@makechapterhead#1{%
+  \ \\[-35.5pt]\hbox to \textwidth {%
+    \hfill {\vbox{\hbox{\rule[5pt]{140pt}{4pt}}%
+        \hbox to 140pt {\hfill\huge\bfseries\slshape \@chapapp\space\thechapter\/}}}}%
+  \vskip55\p@%
+  {\parindent \z@ \raggedright \normalfont%
+    \interlinepenalty\@M%
+    \Huge \bfseries #1\par\nobreak%
+    \vskip 45\p@%
+  }}
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                       \if@mainmatter
+                         \refstepcounter{chapter}%
+                         \typeout{\@chapapp\space\thechapter.}%
+                         \addcontentsline{toc}{chapter}%
+                                   {\protect\numberline{\thechapter}#1}%
+                       \else
+                         \addcontentsline{toc}{chapter}{#1}%
+                       \fi
+                    \else
+                      \addcontentsline{toc}{chapter}{#1}%
+                    \fi
+                    \chaptermark{#1}%
+                    \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                    \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                    \addtocontents{loa}{\protect\addvspace{10\p@}}%
+                    \if@twocolumn
+                      \@topnewpage[\@makechapterhead{#2}]%
+                    \else
+                      \@makechapterhead{#2}%
+                      \@afterheading
+                    \fi}
+\def\@schapter#1{\addcontentsline{toc}{chapter}{#1}%
+                 \markboth{#1}{#1}%
+                 \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                 \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                 \addtocontents{loa}{\protect\addvspace{10\p@}}%
+                 \if@twocolumn%
+                    \@topnewpage[\@makeschapterhead{#1}]%
+                 \else%
+                    \@makeschapterhead{#1}%
+                    \@afterheading%
+                 \fi}
+\def\@makeschapterhead#1{%
+  \ \\[-35.5pt]\hbox to \textwidth {%
+    \hfill {\vbox{\hbox{\rule[5pt]{140pt}{0pt}\rule[5pt]{0pt}{4pt}}%
+        \hbox to 140pt {\hfill\huge\bfseries\slshape \ \/}}}}%
+  \vskip55\p@%
+  {\parindent \z@ \raggedright \normalfont%
+    \interlinepenalty\@M%
+    \Huge \bfseries  #1\par\nobreak%
+    \vskip 45\p@%
+  }}
+
+% Table of contents
+\def\contentsname{Contents}
+\renewcommand\tableofcontents{%
+    \if@twocolumn%
+      \@restonecoltrue\onecolumn%
+    \else%
+      \@restonecolfalse%
+    \fi%
+    \chapter*{\contentsname}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi%
+    }
+
+% Bibliography
+\renewenvironment{thebibliography}[1]
+     {\chapter*{\bibname}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+
+% Floats
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{\textbf{#1: #2}}%
+  \ifdim \wd\@tempboxa >\hsize
+    \textbf{#1: #2.}\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.9}
+
+% Tables
+\usepackage{dcolumn}
+\usepackage{hhline}
+
+% Graphics
+\usepackage[dvips]{graphicx}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{rotating}
+\usepackage{psfrag}
+\usepackage{epic}
+\usepackage{eepic}
+
+% Algorithm environment
+\newcounter{algorithm}[chapter]
+\renewcommand{\thealgorithm}{\thechapter.\@arabic\c@algorithm}
+\def\fps@algorithm{t}
+\def\ftype@algorithm{1}
+\def\ext@algorithm{loa}
+\def\fnum@algorithm{Algorithm~\thealgorithm}
+\newenvironment{algorithm}{\@float{algorithm}}{\end@float}
+\newenvironment{algorithm*}{\@dblfloat{algorithm}}{\end@dblfloat}
+\newenvironment{alevel}%
+   {\begin{list}{}{%
+      \setlength{\topsep}{0pt}%
+      \setlength{\parskip}{0pt}%
+      \setlength{\partopsep}{0pt}%
+      \setlength{\parsep}{0pt}%
+      \setlength{\itemsep}{0pt}}}%
+   {\end{list}}
+\newcommand\listalgorithmsname{List of Algorithms}
+\newcommand\listofalgorithms{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\listalgorithmsname}%
+      \@mkboth{\listalgorithmsname}{\listalgorithmsname}%
+    \@starttoc{loa}%
+    \if@restonecol\twocolumn\fi
+    }
+\newcommand*\l@algorithm{\@dottedtocline{1}{1.5em}{2.3em}}
+
+% List of figures and tables
+\renewcommand\listoffigures{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\listfigurename}%
+      \@mkboth{\listfigurename}{\listfigurename}%
+    \@starttoc{lof}%
+    \if@restonecol\twocolumn\fi
+    }
+\renewcommand\listoftables{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\listtablename}%
+      \@mkboth{\listtablename}{\listtablename}%
+    \@starttoc{lot}%
+    \if@restonecol\twocolumn\fi
+    }
+
+% Math symbols, fonts, etc.
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\renewcommand{\S}{\mathbb{S}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+
+\newcommand{\Cf}{\mathfrak{C}}
+\newcommand{\Pf}{\mathfrak{P}}
+
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\avg}{avg}
+\DeclareMathOperator{\floor}{floor}
+\DeclareMathOperator{\ceil}{ceil}
+\DeclareMathOperator{\round}{round}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\absd}[1]{\left\lvert#1\right\rvert}
+\providecommand{\card}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+
+% URLs
+\usepackage{url}
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\footnotesize\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+
+
+
+\makeatother
+
+
+\begin{document}
+
+
+\frontmatter
+
+
+\begin{titlepage}
+
+\begin{center}
+\vspace*{3ex}
+\textbf{\Huge Title line 1}\\[2ex]
+\textbf{\Huge Title line 2}\\[12ex]
+\textbf{\large A thesis submitted in partial fulfilment}\\[1ex]
+\textbf{\large of the requirement for the degree of Doctor of
+  Philosophy}\\[16ex]
+\textbf{\LARGE Name M. Lastname}\\
+\vfill
+\textbf{\LARGE July 2011}\\
+\vfill
+\textbf{\LARGE Cardiff University}\\[1ex]
+\textbf{\LARGE School of Computer Science \& Informatics}\\[4ex]
+\end{center}
+
+\end{titlepage}
+\newpage\thispagestyle{empty}\cleardoublepage
+
+
+\thispagestyle{plain}
+
+\vspace*{6ex}
+
+\textbf{\large Declaration}
+
+This work has not previously been accepted in substance for any degree and is not concurrently submitted in candidature for any degree.\\[2ex]
+Signed \dotfill \ (candidate) \hspace*{10em}\\[1ex]
+Date\ \ \ \ \ \dotfill \hspace*{18em}
+
+\vfill
+
+\textbf{\large Statement 1}
+
+This thesis is being submitted in partial fulfillment of the requirements for the degree of PhD.\\[2ex]
+Signed \dotfill \ (candidate) \hspace*{10em}\\[1ex]
+Date\ \ \ \ \ \dotfill \hspace*{18em}
+
+\textbf{\large Statement 2}
+
+This thesis is the result of my own independent work/investigation,
+except where otherwise stated. Other sources are acknowledged by
+explicit references.\\[2ex]
+Signed \dotfill \ (candidate) \hspace*{10em}\\[1ex]
+Date\ \ \ \ \ \dotfill \hspace*{18em}
+
+\vfill
+
+\textbf{\large Statement 3}
+
+I hereby give consent for my thesis, if accepted, to be available for photocopying and for inter-library loan,
+ and for the title and summary to be made available to outside organisations.\\[2ex]
+Signed \dotfill \ (candidate) \hspace*{10em}\\[1ex]
+Date\ \ \ \ \ \dotfill \hspace*{18em}
+
+\vfill
+
+\cleardoublepage
+
+\thispagestyle{plain}
+\ \vfill{\small
+Copyright \copyright\ 2011 Name Lastname.\\
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.2 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A
+copy of the license is included in the section entitled ``GNU Free
+Documentation License''.}\\[3.5ex]
+A copy of this document in various transparent and opaque
+machine-readable formats and related software is available at
+\url{http://yourwebsite}.
+\cleardoublepage
+
+
+\ \vspace*{1.11cm}
+\markboth{Dedication}{}
+\begin{flushright}
+\textbf{\large To People you care}\\
+\textbf{\large for their patience and support.}
+\end{flushright}
+\newpage
+\markboth{}{}
+\cleardoublepage
+
+
+\chapter*{Abstract}
+
+%\def\baselinestretch{1}\normalfont
+
+\def\baselinestretch{1.5}\normalfont
+
+
+\chapter*{Acknowledgements}
+
+\tableofcontents
+
+\input{listofpublications.tex}
+
+\listoffigures
+
+\listoftables
+
+\listofalgorithms
+
+\input{acronyms.tex}
+
+\mainmatter
+%begin each chapter chapter1.tex by \Chapter{chapter1}, for example, then the sections and so on...
+\input{chapter1}
+
+
+\backmatter
+
+\def\baselinestretch{1}\normalfont
+\input{fdl.tex}
+\def\baselinestretch{1.24}\normalfont
+
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+
+\end{document}
